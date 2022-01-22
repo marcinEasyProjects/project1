@@ -1,0 +1,36 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        {{scenario === scenarios.ADD ? translations.AddEditDiaryModal.titleAdd : translations.AddEditDiaryModal.titleEdit}}
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addEditForm">
+            <div class="row">
+                <div class="col-12">
+                    <input class="p-2" formControlName="name"/>
+                    <app-input-message [control]="$any(addEditForm).get('name') ?? null"></app-input-message>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <input class="p-2" formControlName="surname"/>
+                    <app-input-message [control]="$any(addEditForm).get('surname') ?? null"></app-input-message>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <input class="p-2" formControlName="grade"/>
+                    <app-input-message [control]="$any(addEditForm).get('grade') ?? null"></app-input-message>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <input class="p-2" formControlName="rating"/>
+                    <app-input-message [control]="$any(addEditForm).get('rating') ?? null"></app-input-message>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" [disabled]="!addEditForm.valid" (click)="modal.close(closeReasons.CONFIRM)">{{translations.AddEditDiaryModal.buttonAddText}}</button>
+    </div>
+</ng-template>

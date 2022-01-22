@@ -1,0 +1,44 @@
+<div class="row border border primary">
+    <div class="col-3">
+        {{translations.List.headerText1}}
+    </div>
+    <div class="col-3">
+        {{translations.List.headerText2}}
+    </div>
+    <div class="col-2">
+        {{translations.List.headerText3}}
+    </div>
+    <div class="col-2">
+        {{translations.List.headerText4}}
+    </div>
+    <div class="col-2">
+        {{translations.List.headerText5}}
+    </div>
+</div>
+<ng-container *ngFor="let item of items; let i = index">
+    <div class="row">
+        <div class="col-3">
+            {{item.name}}
+        </div>
+        <div class="col-3">
+            {{item.surname}}
+        </div>
+        <div class="col-2">
+            {{item.grade}}
+        </div>
+        <div class="col-2">
+            {{item.rating}}
+        </div>
+        <div class="col-2">
+            <div class="row">
+                <div class="col-6">
+                    <button class="btn btn-secondary" (click)="edit(item)">{{translations.List.edit}}</button>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-danger" (click)="remove(item)">{{translations.List.remove}}</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</ng-container>

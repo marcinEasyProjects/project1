@@ -1,5 +1,3 @@
-button {
-    &.a {
-        background-color: red;
-    }
-}
+@import 'styles/common.scss';
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

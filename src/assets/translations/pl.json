@@ -1,0 +1,30 @@
+{
+    "Comment": "This file is a mock of final translations",
+    "Base": {
+        "title": "E-dziennik",
+        "buttonAddText": "Dodaj wpis",
+        "unknownError": "Przepraszamy, wystąpił nieznany błąd"
+    },
+    "List": {
+        "headerText1": "Imię",
+        "headerText2": "Nazwisko",
+        "headerText3": "Klasa",
+        "headerText4": "Ocena",
+        "headerText5": "Akcje",
+        "edit": "Edytuj",
+        "remove": "Usuń"
+    },
+    "AddEditDiaryModal": {
+        "titleAdd": "Dodaj nowy wpis",
+        "titleEdit": "Edytuj wpis",
+        "buttonAddText": "Zatwierdź"
+    },
+    "RemoveWarningModal": {
+        "title": "Czy na pewno chcesz usunąć ten element?",
+        "canceltext": "Anuluj",
+        "acceptText": "Usuń"
+    },
+    "InputMessage": {
+        "requiredText": "To pole jest obowiązkowe"
+    }
+}
