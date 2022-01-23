@@ -32,15 +32,13 @@ export class BaseComponent implements OnInit {
         this.performActionOnBackendAndFetchData(() => of(true));
     }
 
-    handleAddOrEditClick(scenario: AddEditDiaryModalScenariosType, item?: DiaryItem): void {
-        if(scenario === this.addEditDiaryModalScenarios.ADD) {
-            this.addEditDiaryModal.open(scenario);
+    handleAddClick(): void {
+        this.addEditDiaryModal.open(this.addEditDiaryModalScenarios.ADD);
+    }
 
-        }
-        else if(scenario === this.addEditDiaryModalScenarios.EDIT && item) {
-            this.addEditDiaryModal.provideData(item);
-            this.addEditDiaryModal.open(scenario);
-        }
+    handleEditClick(item: DiaryItem): void {
+        this.addEditDiaryModal.provideData(item);
+        this.addEditDiaryModal.open(this.addEditDiaryModalScenarios.EDIT);
     }
 
     handleRemoveClick(item: DiaryItem): void {

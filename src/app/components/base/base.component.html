@@ -19,13 +19,13 @@
             <div class="row justify-content-center mt-5 mb-3 add-button-container">
                 <div class="col-12 col-md-10 col-lg-8 text-right">
                     <div class="custom-row">
-                        <button class="btn btn-primary" (click)="handleAddOrEditClick(addEditDiaryModalScenarios.ADD)">{{translations.Base.buttonAddText}}</button>
+                        <button class="btn btn-primary" (click)="handleAddClick()">{{translations.Base.buttonAddText}}</button>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center list-container">
                 <div class="col-12 col-md-10 col-lg-8">
-                    <app-list [items]="diaryItems" (onEdit)="handleAddOrEditClick(addEditDiaryModalScenarios.EDIT, $event)" (onRemove)="handleRemoveClick($event)"></app-list>
+                    <app-list [items]="diaryItems" (onEdit)="handleEditClick($event)" (onRemove)="handleRemoveClick($event)"></app-list>
                 </div>
             </div>
         </div>

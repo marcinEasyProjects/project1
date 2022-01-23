@@ -6,7 +6,7 @@ API providing data is simulated using RxJS library.
 App handles error states, empty state and loading state. When error occures, app let user to try to send API request by clicking "try again" button.
 In mocks.ts you can change data to display on list.
 App is responsive.
-Builded with strict mode.
+Built with strict mode.
 
 Node version: 16.3.2
 Angular 13

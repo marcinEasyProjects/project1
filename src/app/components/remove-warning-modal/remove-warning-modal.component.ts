@@ -22,10 +22,12 @@ export class RemoveWarningModalComponent implements OnInit {
     ngOnInit(): void {}
 
     open(data: any): void {
-        this.modalService.open(this.modalContent).result.then((value) => {
-            if(value === this.closeReasons.REMOVE) {
-                this.onRemove.emit(data);
-            }
-        });
+        this.modalService.open(this.modalContent).result.
+            then((value) => {
+                if(value === this.closeReasons.REMOVE) {
+                    this.onRemove.emit(data);
+                }
+            })
+            .catch(_ => {});
     }
 }
