@@ -14,6 +14,7 @@ Bootstrap 4
 TypeScript 4.5.5
 
 How to run:
+0. clone repo and stay on master branch
 1. nvm install 16.3.2
 2. nvm use 16.3.2
 3. npm install
