@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { catchError, delay, empty, finalize, Observable, of, switchMap, tap, throwError } from 'rxjs';
+import { catchError, finalize, Observable, of, switchMap } from 'rxjs';
 import { DiaryItem } from 'src/app/services/data-structures/diary';
 import { DiaryService } from 'src/app/services/diary.service';
 import * as Translations from '../../../assets/translations/pl.json';
@@ -24,10 +24,12 @@ export class BaseComponent implements OnInit {
     loading = true;
     errorMessage = '';
 
-    constructor(private readonly diaryService: DiaryService) { }
+    constructor(
+        private readonly diaryService: DiaryService
+    ) { }
 
     ngOnInit(): void {
-        this.fetchData();
+        this.performActionOnBackendAndFetchData(() => of(true));
     }
 
     handleAddOrEditClick(scenario: AddEditDiaryModalScenariosType, item?: DiaryItem): void {
@@ -45,36 +47,27 @@ export class BaseComponent implements OnInit {
         this.removeWarningModal.open(item);
     }
 
+    handleTryAgainClick(): void {
+        this.errorMessage = '';
+        this.performActionOnBackendAndFetchData(() => of(true));
+    }
+
     handleAddItem(item: DiaryItem): void {
-        this.performActionOnBackendAndFetchData(item, this.diaryService.addDiaryItem.bind(this.diaryService));
+        this.performActionOnBackendAndFetchData(this.diaryService.addDiaryItem.bind(this.diaryService), item);
     }
 
     handleEditItem(item: DiaryItem): void {
-        this.performActionOnBackendAndFetchData(item, this.diaryService.editDiaryItem.bind(this.diaryService));
+        this.performActionOnBackendAndFetchData(this.diaryService.editDiaryItem.bind(this.diaryService), item);
     }
 
     handleRemove(item: DiaryItem): void {
-        this.performActionOnBackendAndFetchData(item, this.diaryService.removeDiaryItem.bind(this.diaryService));
+        this.performActionOnBackendAndFetchData(this.diaryService.removeDiaryItem.bind(this.diaryService), item);
     }
 
-    private fetchData(): void {
-        this.diaryService.getDiaryItems().pipe(
-            finalize(() => {
-                this.loading = false;
-            }),
-        )
-        .subscribe({
-            next: (res: DiaryItem[]) => {
-                this.diaryItems = res;
-            },
-            error: (_) => {
-                this.errorMessage = this.translations.Base.unknownError;
-            }
-        });
-    }
+    private performActionOnBackendAndFetchData(callback: CallbackUnionType, item?: DiaryItem): void {
+        this.loading = true;
 
-    private performActionOnBackendAndFetchData(item: DiaryItem, callback: (item: DiaryItem) => Observable<boolean>): void {
-        callback(item).pipe(
+        callback(item!).pipe(
             switchMap((_) => {
                 return this.diaryService.getDiaryItems().pipe(
                     finalize(() => {
@@ -91,87 +84,11 @@ export class BaseComponent implements OnInit {
             next: (res: DiaryItem[]) => {
                 this.diaryItems = res;
             },
-            error: (err) => {
-                console.log(err);
+            error: (_) => {
                 this.errorMessage = this.translations.Base.unknownError;
             }
         });
     }
-
-    // private performAddingOnBackend(item: DiaryItem): void {
-    //     this.loading = true;
-    //     this.diaryService.addDiaryItem(item).pipe(
-    //         switchMap((_) => {
-    //             return this.diaryService.getDiaryItems().pipe(
-    //                 finalize(() => {
-    //                     this.loading = false;
-    //                 }),
-    //                 catchError((_) => {
-    //                     this.errorMessage = this.translations.Base.unknownError;
-    //                     return of([]);
-    //                 })
-    //             );
-    //         })
-    //     )
-    //     .subscribe({
-    //         next: (res: DiaryItem[]) => {
-    //             this.diaryItems = res;
-    //         },
-    //         error: (_) => {
-    //             this.errorMessage = this.translations.Base.unknownError;
-    //         }
-    //     });
-    // }
-
-    // private performEditingOnBackend(item: DiaryItem): void {
-    //     this.loading = true;
-
-    //     this.diaryService.editDiaryItem(item).pipe(
-    //         switchMap((_) => {
-    //             return this.diaryService.getDiaryItems().pipe(
-    //                 finalize(() => {
-    //                     this.loading = false;
-    //                 }),
-    //                 catchError((_) => {
-    //                     this.errorMessage = this.translations.Base.unknownError;
-    //                     return of([]);
-    //                 })
-    //             );
-    //         })
-    //     )
-    //     .subscribe({
-    //         next: (res: DiaryItem[]) => {
-    //             this.diaryItems = res;
-    //         },
-    //         error: (_) => {
-    //             this.errorMessage = this.translations.Base.unknownError;
-    //         }
-    //     });
-    // }
-
-    // private performRemovingOnBackend(item: DiaryItem): void {
-    //     this.loading = true;
-
-    //     this.diaryService.removeDiaryItem(item).pipe(
-    //         switchMap((_) => {
-    //             return this.diaryService.getDiaryItems().pipe(
-    //                 finalize(() => {
-    //                     this.loading = false;
-    //                 }),
-    //                 catchError((_) => {
-    //                     this.errorMessage = this.translations.Base.unknownError;
-    //                     return of([]);
-    //                 })
-    //             );
-    //         })
-    //     )
-    //     .subscribe({
-    //         next: (res: DiaryItem[]) => {
-    //             this.diaryItems = res;
-    //         },
-    //         error: (_) => {
-    //             this.errorMessage = this.translations.Base.unknownError;
-    //         }
-    //     });
-    // }
 }
+
+type CallbackUnionType = ((item: DiaryItem) => Observable<boolean>) | (() => Observable<boolean>);

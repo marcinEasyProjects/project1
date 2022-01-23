@@ -1,17 +1,44 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12 title-container text-center p-5 border">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8 text-center p-5 title-container">
             <span class="title">{{translations.Base.title}}</span>
         </div>
     </div>
-    <div class="row justify-content-center mt-5 mb-3 border">
-        <div class="col-8 text-right">
-            <button class="btn btn-primary" (click)="handleAddOrEditClick(addEditDiaryModalScenarios.ADD)">{{translations.Base.buttonAddText}}</button>
+    <div *ngIf="errorMessage !== ''">
+        <div class="row justify-content-center error-message-container">
+            <div class="col-12 col-md-10 col-lg-8 text-center">
+                <div class="error-message">{{errorMessage}}</div>
+                <div>
+                    <button class="btn btn-primary mt-2 try-again-button" (click)="handleTryAgainClick()">{{translations.Base.tryAgain}}</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row justify-content-center border">
-        <div class="col-8">
-            <app-list [items]="diaryItems" (onEdit)="handleAddOrEditClick(addEditDiaryModalScenarios.EDIT, $event)" (onRemove)="handleRemoveClick($event)"></app-list>
+    <div *ngIf="errorMessage === ''">
+        <div *ngIf="!loading">
+            <div class="row justify-content-center mt-5 mb-3 add-button-container">
+                <div class="col-12 col-md-10 col-lg-8 text-right">
+                    <div class="custom-row">
+                        <button class="btn btn-primary" (click)="handleAddOrEditClick(addEditDiaryModalScenarios.ADD)">{{translations.Base.buttonAddText}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center list-container">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <app-list [items]="diaryItems" (onEdit)="handleAddOrEditClick(addEditDiaryModalScenarios.EDIT, $event)" (onRemove)="handleRemoveClick($event)"></app-list>
+                </div>
+            </div>
+        </div>
+        <div class="loader-container" *ngIf="loading">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div class="loader">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

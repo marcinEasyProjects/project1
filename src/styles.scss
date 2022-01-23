@@ -1,3 +1,7 @@
 @import 'styles/common.scss';
-/* Importing Bootstrap SCSS file. */
+@import 'styles/bootstrap-custom.scss';
+@import './colors.scss';
+
 @import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/functions';

@@ -1,0 +1,29 @@
+@import '../../../colors.scss';
+
+//not nice
+::ng-deep .modal-dialog {
+    @media screen and (min-width: 1200px) {
+        max-width: 700px;
+    }
+
+    .modal-content {
+        border: 1px solid $grey !important;
+    }
+}
+
+.modal-header {
+    .close {
+        color: $wheat;
+    }
+}
+
+.modal-footer {
+    .btn {
+        width: 40%;
+        color: $wheat;
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+        }
+    }
+}

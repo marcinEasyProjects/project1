@@ -1,0 +1,43 @@
+@import '../../../colors.scss';
+
+//not nice
+::ng-deep .modal-dialog {
+    @media screen and (min-width: 1200px) {
+        max-width: 700px;
+    }
+
+    .modal-content {
+        border: 1px solid $grey !important;
+    }
+}
+
+.modal-body {
+    input, select {
+        width: 100%;
+        background-color: $wheat;
+    
+        &::placeholder {
+            color: $black;
+            opacity: 1;
+        }
+    }
+    
+    select {
+        color: $black;
+    
+        option {
+            color: $black;
+        }
+    }
+}
+
+.modal-footer {
+    .btn {
+        color: $wheat;
+        width: 40%;
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+        }
+    }
+}

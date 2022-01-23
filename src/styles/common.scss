@@ -1,3 +1,37 @@
+@import '../colors.scss';
+
 body {
     overflow-x: hidden;
+    height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+.modal-header {
+    background-color: $graphiteColorDarker;
+    color: $wheat;
+    border: none !important;
+    font-size: 20px;
+}
+
+.modal-body {
+    background-color: $graphiteColor;
+    border: none;
+}
+
+.modal-footer {
+    background-color: $graphiteColorDarker;
+    color: $wheat;
+    border: none !important;
+
+    button {
+        color: $wheat;
+    }
+}
+
+.error-message {
+    font-size: 25px;
+    color: $red;
 }

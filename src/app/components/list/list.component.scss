@@ -1,0 +1,41 @@
+@import '../../../colors.scss';
+
+.list-container {
+    font-size: 25px;
+
+    @media screen and (max-width: 576px) {
+        font-size: 13px;
+    }
+
+    @media screen and (min-width: 576px) and (max-width: 992px) {
+        font-size: 17px;
+    }
+
+    bi {
+        width: 25px;
+        height: 25px;
+
+        @media screen and (max-width: 576px) {
+            width: 15px;
+            height: 15px;
+        }
+
+        @media screen and (min-width: 576px) and (max-width: 992px) {
+            width: 20px;
+            height: 20px;
+        }
+
+        cursor: pointer;
+    
+        &[name='trash'] {
+            color: $red;
+        }
+    }
+    
+    .headers {
+        background-color: $graphiteColorDarker;
+        .header-text {
+            font-weight: 700;
+        }
+    }
+}

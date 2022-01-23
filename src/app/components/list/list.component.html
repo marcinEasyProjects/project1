@@ -1,44 +1,57 @@
-<div class="row border border primary">
-    <div class="col-3">
-        {{translations.List.headerText1}}
-    </div>
-    <div class="col-3">
-        {{translations.List.headerText2}}
-    </div>
-    <div class="col-2">
-        {{translations.List.headerText3}}
-    </div>
-    <div class="col-2">
-        {{translations.List.headerText4}}
-    </div>
-    <div class="col-2">
-        {{translations.List.headerText5}}
+<div class="row list-container" *ngIf="items.length > 0">
+    <div class="col-12">
+        <div class="row py-4 mb-2 headers">
+            <div class="col-3 col-sm-3">
+                <span class="header-text">{{translations.List.headerText1}}</span>
+            </div>
+            <div class="col-3 col-sm-3">
+                <span class="header-text">{{translations.List.headerText2}}</span>
+            </div>
+            <div class="col-2 col-sm-2">
+                <span class="header-text">{{translations.List.headerText3}}</span>
+            </div>
+            <div class="col-2 col-sm-2">
+                <span class="header-text">{{translations.List.headerText4}}</span>
+            </div>
+            <div class="col-2 col-sm-2">
+                <span class="header-text">{{translations.List.headerText5}}</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <ng-container *ngFor="let item of items; let i = index">
+                <div class="row py-2">
+                    <div class="col-3 col-sm-3">
+                        {{item.name}}
+                    </div>
+                    <div class="col-3 col-sm-3">
+                        {{item.surname}}
+                    </div>
+                    <div class="col-2 col-sm-2">
+                        {{item.grade}}
+                    </div>
+                    <div class="col-2 col-sm-2">
+                        {{item.rating}}
+                    </div>
+                    <div class="col-2 col-sm-2 d-flex align-items-center">
+                        <div class="d-flex">
+                            <div class="pl-0 pr-1 pl-md-0 pr-sm-3">
+                                <bi name="pen" (click)="edit(item)"></bi>
+                            </div>
+                            <div class="pl-0 pr-1 pl-md-0 pr-sm-3">
+                                <bi name="trash" (click)="remove(item)"></bi>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
     </div>
 </div>
-<ng-container *ngFor="let item of items; let i = index">
-    <div class="row">
-        <div class="col-3">
-            {{item.name}}
-        </div>
-        <div class="col-3">
-            {{item.surname}}
-        </div>
-        <div class="col-2">
-            {{item.grade}}
-        </div>
-        <div class="col-2">
-            {{item.rating}}
-        </div>
-        <div class="col-2">
-            <div class="row">
-                <div class="col-6">
-                    <button class="btn btn-secondary" (click)="edit(item)">{{translations.List.edit}}</button>
-                </div>
-                <div class="col-6">
-                    <button class="btn btn-danger" (click)="remove(item)">{{translations.List.remove}}</button>
-                </div>
-            </div>
-            
-        </div>
+<div class="row" *ngIf="items.length === 0">
+    <div class="col-12 text-center">
+        {{translations.List.noItems}}
     </div>
-</ng-container>
+    <div class="col-12 text-center">
+        {{translations.List.noItems2}}
+    </div>
+</div>

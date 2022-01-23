@@ -3,9 +3,11 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DiaryItem } from 'src/app/services/data-structures/diary';
+import { GradeService } from 'src/app/services/grade.service';
 import * as Translations from '../../../assets/translations/pl.json';
 import { AddEditForm } from './data-structures.ts/add-edit-form';
 import { CloseReasons } from './data-structures.ts/close-reasons';
+import { ratings } from './data-structures.ts/ratings';
 import { AddEditDiaryModalScenarios, AddEditDiaryModalScenariosType } from './data-structures.ts/scenarios';
 
 @Component({
@@ -21,23 +23,34 @@ export class AddEditDiaryModalComponent implements OnInit {
     @Output() onEdit = new EventEmitter<DiaryItem>();
 
     readonly translations = Translations;
+    readonly ratings = ratings;
     readonly closeReasons = CloseReasons;
     readonly scenarios = AddEditDiaryModalScenarios;
 
     scenario!: AddEditDiaryModalScenariosType;
 
     addEditForm!: AddEditForm;
+    grades!: Array<string>;
+    errorMessage = '';
+
     private editingItemId!: number;
 
-    constructor(private readonly modalService: NgbModal) { }
+    constructor(
+        private readonly modalService: NgbModal,
+        private readonly gradeService: GradeService
+    ) { }
 
     ngOnInit(): void {
-        this.addEditForm = new FormGroup({
-            name: new FormControl('', Validators.required),
-            surname: new FormControl('', Validators.required),
-            grade: new FormControl('', Validators.required),
-            rating: new FormControl('', Validators.required),
-        }) as AddEditForm;
+        this.gradeService.getGradeItems()
+        .subscribe({
+            next: (res: Array<string>) => {
+                this.grades = res;
+                this.generateForm();
+            },
+            error: (_) => {
+                this.errorMessage = this.translations.AddEditDiaryModal.unknownError;
+            }
+        });
     }
 
     open(scenario: AddEditDiaryModalScenariosType): void {
@@ -70,5 +83,14 @@ export class AddEditDiaryModalComponent implements OnInit {
         else {
             throw Error('Id should be provided!');
         }
+    }
+
+    private generateForm(): void {
+        this.addEditForm = new FormGroup({
+            name: new FormControl('', Validators.required),
+            surname: new FormControl('', Validators.required),
+            grade: new FormControl(null, Validators.required),
+            rating: new FormControl(null, Validators.required),
+        }) as AddEditForm;
     }
 }

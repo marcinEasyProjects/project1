@@ -3,5 +3,5 @@ export interface DiaryItem {
     name: string;
     surname: string;
     grade: string;
-    rating: string;
+    rating: number;
 }

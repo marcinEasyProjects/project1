@@ -1,8 +1,73 @@
+@import '../../../colors.scss';
+
 .container-fluid {
+    background-color: $graphiteColor;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 200px;
+
     .title-container {
+        color: $wheat;
+
         .title {
             font-weight: bold;
             font-size: 40px;
+
+            @media screen and (max-width: 576px) {
+                font-size: 30px;
+            }
+        }
+    }
+
+    .add-button-container {
+        .custom-row {
+            margin-right: -15px;
+
+            @media screen and (max-width: 768px) {
+                margin-left: -15px;
+            }
+        }
+
+        button {
+            @media screen and (max-width: 768px) {
+                width: 100%;
+            }
+
+            @media screen and (min-width: 768px) {
+                width: 200px;
+            }
+
+            color: $wheat;
+        }
+    }
+
+    .loader-container {
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+
+            .spinner-border {
+                color: $wheat;
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+
+    .list-container {
+        overflow-x: auto;
+
+        div {
+            background: $lightBlack;
+            color: $wheat;
+        }
+    }
+
+    .error-message-container {
+        .try-again-button {
+            color: $wheat;
         }
     }
 }

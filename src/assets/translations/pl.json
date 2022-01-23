@@ -3,7 +3,8 @@
     "Base": {
         "title": "E-dziennik",
         "buttonAddText": "Dodaj wpis",
-        "unknownError": "Przepraszamy, wystąpił nieznany błąd"
+        "unknownError": "Przepraszamy, wystąpił nieznany błąd",
+        "tryAgain": "Spróbuj ponownie"
     },
     "List": {
         "headerText1": "Imię",
@@ -12,12 +13,19 @@
         "headerText4": "Ocena",
         "headerText5": "Akcje",
         "edit": "Edytuj",
-        "remove": "Usuń"
+        "remove": "Usuń",
+        "noItems": "Brak elementów",
+        "noItems2": "Zachęcam do dodania"
     },
     "AddEditDiaryModal": {
         "titleAdd": "Dodaj nowy wpis",
         "titleEdit": "Edytuj wpis",
-        "buttonAddText": "Zatwierdź"
+        "buttonAddText": "Zatwierdź",
+        "namePlaceholder": "Wprowadź imię...",
+        "surnamePlaceholder": "Wprowadź nazwisko...",
+        "gradePlaceholder": "Wybierz klasę...",
+        "ratingPlaceholder": "Wybierz ocenę...",
+        "unknownError": "Przepraszamy, wystąpił nieznany błąd"
     },
     "RemoveWarningModal": {
         "title": "Czy na pewno chcesz usunąć ten element?",

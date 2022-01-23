@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, of, tap } from 'rxjs';
+import { delay, Observable, of, tap, throwError } from 'rxjs';
 import { DiaryItem } from './data-structures/diary';
-import { mockedItems } from './mocks';
+import { mockedDiaryItems } from './mocks';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DiaryService {
 
-    private mockedItems: DiaryItem[] = mockedItems;
+    private mockedItems: DiaryItem[] = mockedDiaryItems;
+    readonly NOT_FOUND = -1;
 
     constructor() { }
 
@@ -20,7 +21,14 @@ export class DiaryService {
         return of(true).pipe(
             delay(1000),
             tap((_) => {
-                this.mockedItems.push(item);
+                const lastElement = this.mockedItems[this.mockedItems.length - 1];
+
+                if(lastElement !== undefined) {
+                    this.mockedItems.push({id: lastElement.id! + 1, ...item});
+                }
+                else {
+                    this.mockedItems.push({id: 1, ...item});
+                }
             })
         );
     }
@@ -31,7 +39,7 @@ export class DiaryService {
             tap((_) => {
                 const indexOfItemInArray = this.mockedItems.findIndex(x => x.id === item.id);
 
-                if(indexOfItemInArray) {
+                if(indexOfItemInArray !== this.NOT_FOUND) {
                     this.mockedItems[indexOfItemInArray] = item;
                 }
             })

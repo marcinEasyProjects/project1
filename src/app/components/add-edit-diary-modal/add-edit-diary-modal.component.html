@@ -6,31 +6,41 @@
         <form [formGroup]="addEditForm">
             <div class="row">
                 <div class="col-12">
-                    <input class="p-2" formControlName="name"/>
-                    <app-input-message [control]="$any(addEditForm).get('name') ?? null"></app-input-message>
+                    <input class="p-2 my-2" formControlName="name" placeholder="{{translations.AddEditDiaryModal.namePlaceholder}}"/>
+                    <app-input-message [control]="$any(addEditForm).get('name')"></app-input-message>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <input class="p-2" formControlName="surname"/>
-                    <app-input-message [control]="$any(addEditForm).get('surname') ?? null"></app-input-message>
+                    <input class="p-2 my-2" formControlName="surname" placeholder="{{translations.AddEditDiaryModal.surnamePlaceholder}}"/>
+                    <app-input-message [control]="$any(addEditForm).get('surname')"></app-input-message>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <input class="p-2" formControlName="grade"/>
-                    <app-input-message [control]="$any(addEditForm).get('grade') ?? null"></app-input-message>
+                    <select class="p-2 my-2" formControlName="grade">
+                        <option [ngValue]="null" disabled>{{translations.AddEditDiaryModal.gradePlaceholder}}</option>
+                        <option *ngFor="let grade of grades" [ngValue]="grade">
+                            {{grade}}
+                        </option>
+                    </select> 
+                    <app-input-message [control]="$any(addEditForm).get('grade')"></app-input-message>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <input class="p-2" formControlName="rating"/>
-                    <app-input-message [control]="$any(addEditForm).get('rating') ?? null"></app-input-message>
+                    <select class="p-2 my-2" formControlName="rating">
+                        <option [ngValue]="null" disabled>{{translations.AddEditDiaryModal.ratingPlaceholder}}</option>
+                        <option *ngFor="let rating of ratings" [ngValue]="rating">
+                            {{rating}}
+                        </option>
+                    </select> 
+                    <app-input-message [control]="$any(addEditForm).get('rating')"></app-input-message>
                 </div>
             </div>
         </form>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer justify-content-center">
         <button class="btn btn-primary" [disabled]="!addEditForm.valid" (click)="modal.close(closeReasons.CONFIRM)">{{translations.AddEditDiaryModal.buttonAddText}}</button>
     </div>
 </ng-template>
