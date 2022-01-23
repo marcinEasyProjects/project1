@@ -1,6 +1,9 @@
 # project1
 Simple Angular Project
 
+Project has simple functionality.
+API providing data is simulated using RxJS library.
+
 Node version: 16.3.2
 Angular 13
 Bootstrap 4
